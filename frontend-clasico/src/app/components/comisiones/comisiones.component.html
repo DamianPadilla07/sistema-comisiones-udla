@@ -1,0 +1,52 @@
+<div class="comisiones-container">
+  <h2>Calcular comisiones por rango de fechas</h2>
+  <p class="subtitle">Ingresa el rango de fechas para obtener el cálculo de comisiones.</p>
+
+<form (ngSubmit)="calcularComisiones()" class="form-row">
+      <div class="input-group">
+      <label for="fechaInicio">Fecha Inicio</label>
+      <input 
+        type="date" 
+        id="fechaInicio" 
+        name="fechaInicio" 
+        [(ngModel)]="fechaInicio" 
+        required 
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="fechaFin">Fecha Fin</label>
+      <input 
+        type="date" 
+        id="fechaFin" 
+        name="fechaFin" 
+        [(ngModel)]="fechaFin" 
+        required 
+      />
+    </div>
+
+    <button type="submit" class="btn-calcular">
+      <span class="icon">🧮</span> Calcular
+    </button>
+  </form>
+
+  <!-- Tabla de Resultados estilizada -->
+  <div class="table-container" *ngIf="comisiones && comisiones.length > 0">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Vendedor</th>
+          <th>Total Ventas</th>
+          <th>Comisión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of comisiones">
+          <td class="vendedor-name">{{ item.vendedor }}</td>
+          <td>${{ item.totalVentas | number:'1.2-2' }}</td>
+          <td class="comision-monto">${{ item.comision | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
